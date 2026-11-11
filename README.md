@@ -1,7 +1,19 @@
 # SyncThing Conflict Deleter
 
 Resolves Syncthing `*.sync-conflict-*` files by keeping one version of each file.
-Works from the folder it is run in (or any `-Path`). **Dry run by default.**
+Works on any folder you give it. **Dry run by default.**
+
+Two versions with the same behavior:
+- `Conflict.ps1` for Windows / PowerShell (`-Path`, `-Prefer`, ...)
+- `conflict.sh` for Linux and Unraid: plain bash + coreutils, no Python or PowerShell needed
+
+```bash
+./conflict.sh DIR                                  # dry run
+./conflict.sh --apply --trash /mnt/user/trash DIR  # keep originals, move conflicts to the trash
+./conflict.sh --prefer largest --ext .jpg DIR      # also: --prefer newest
+```
+
+The options below are written for `Conflict.ps1`; `conflict.sh` uses the lowercase flag form (`--prefer`, `--ext`, `--trash`, `--apply`).
 
 ```powershell
 .\Conflict.ps1                                      # dry run: shows KEEP / REMOVE per file
